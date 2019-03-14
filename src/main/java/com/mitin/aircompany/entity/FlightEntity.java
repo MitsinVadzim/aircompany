@@ -12,7 +12,9 @@ public class FlightEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long num;
+    private Long id;
+
+    private String num;
 
     private String fromPlace;
 

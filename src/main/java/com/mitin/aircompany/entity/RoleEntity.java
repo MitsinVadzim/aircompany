@@ -1,12 +1,5 @@
 package com.mitin.aircompany.entity;
 
-import org.springframework.security.core.GrantedAuthority;
-
-public enum  RoleEntity implements GrantedAuthority {
+public enum  RoleEntity {
     USER, ADMIN;
-
-    @Override
-    public String getAuthority() {
-        return name();
-    }
 }
