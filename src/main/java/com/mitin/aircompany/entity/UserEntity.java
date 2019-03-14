@@ -31,5 +31,5 @@ public class UserEntity{
     private List<TicketEntity> tickets;
 
     @ManyToMany(mappedBy = "subscribers")
-    private Set<FlightEntity> subscriptions = new HashSet<>();
+    private Set<RouteEntity> subscriptions = new HashSet<>();
 }

@@ -23,7 +23,7 @@ public class DiscountEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "flight_id")
     @JsonIgnore
-    private FlightEntity flight;
+    private RouteEntity flight;
 
 
 }
