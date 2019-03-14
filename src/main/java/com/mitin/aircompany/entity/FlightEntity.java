@@ -3,7 +3,9 @@ package com.mitin.aircompany.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -28,4 +30,12 @@ public class FlightEntity {
 
     @OneToMany(mappedBy = "flight", fetch = FetchType.LAZY)
     private List<DiscountEntity> discountEntities;
+
+    @ManyToMany
+    @JoinTable(
+            name = "Subscriber_Flight",
+            joinColumns = {@JoinColumn(name = "flight_id")},
+            inverseJoinColumns = {@JoinColumn(name = "user_id")}
+    )
+    private Set<UserEntity> subscribers = new HashSet<>();
 }

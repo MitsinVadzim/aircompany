@@ -3,6 +3,7 @@ package com.mitin.aircompany.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -18,6 +19,8 @@ public class UserEntity{
 
     private String password;
 
+    private String email;
+
 
     @ElementCollection(targetClass = RoleEntity.class, fetch = FetchType.LAZY)
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
@@ -26,4 +29,7 @@ public class UserEntity{
 
     @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)
     private List<TicketEntity> tickets;
+
+    @ManyToMany(mappedBy = "subscribers")
+    private Set<FlightEntity> subscriptions = new HashSet<>();
 }

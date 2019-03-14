@@ -24,4 +24,6 @@ public class DiscountEntity {
     @JoinColumn(name = "flight_id")
     @JsonIgnore
     private FlightEntity flight;
+
+
 }
