@@ -3,6 +3,7 @@ package com.mitin.aircompany.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -22,4 +23,7 @@ public class UserEntity{
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
     private Set<RoleEntity> roles;
+
+    @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)
+    private List<TicketEntity> tickets;
 }

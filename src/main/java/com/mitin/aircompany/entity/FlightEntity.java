@@ -25,4 +25,7 @@ public class FlightEntity {
 
     @OneToMany(mappedBy = "flight", fetch = FetchType.LAZY)
     private List<FlightInfoEntity> flightInfoEntities;
+
+    @OneToMany(mappedBy = "flight", fetch = FetchType.LAZY)
+    private List<DiscountEntity> discountEntities;
 }

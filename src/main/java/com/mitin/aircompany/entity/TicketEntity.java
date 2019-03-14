@@ -5,26 +5,23 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 @Entity
 @Data
-@Table(name = "flightinfo")
-public class FlightInfoEntity {
+@Table(name = "ticket")
+public class TicketEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private LocalDateTime dateTime;
+    private String fromPlace;
 
-    private int capacity;
+    private String toPlace;
 
     private BigDecimal price;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "flight_id")
+    @JoinColumn(name = "user_id")
     @JsonIgnore
-    private FlightEntity flight;
-
-
+    private UserEntity owner;
 }

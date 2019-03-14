@@ -4,27 +4,24 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
 @Data
-@Table(name = "flightinfo")
-public class FlightInfoEntity {
+@Table(name = "discount")
+public class DiscountEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private LocalDateTime dateTime;
+    private LocalDateTime fromDate;
 
-    private int capacity;
+    private LocalDateTime toDate;
 
-    private BigDecimal price;
+    private int value;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "flight_id")
     @JsonIgnore
     private FlightEntity flight;
-
-
 }
