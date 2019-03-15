@@ -1,10 +1,11 @@
 package com.mitin.aircompany.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data
@@ -18,12 +19,13 @@ public class DiscountEntity {
 
     private LocalDateTime toDate;
 
-    private int value;
+    private Double value;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "flight_id")
-    @JsonIgnore
-    private RouteEntity flight;
-
-
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "Route_Discount",
+            joinColumns = {@JoinColumn(name = "discount_id")},
+            inverseJoinColumns = {@JoinColumn(name = "route_id")}
+    )
+    private Set<RouteEntity> routes = new HashSet<>();
 }
