@@ -40,10 +40,16 @@ public class RouteController {
 
     @PutMapping("/routes/{routeid}")
     public Route update(
-
             @RequestBody Route route,
             @PathVariable("routeid") Long routeId
     ){
         return routeService.update(route, routeId);
+    }
+
+    @DeleteMapping("/routes/{routeid}")
+    public void delete(
+        @PathVariable("routeid") Long routeId
+    ){
+        routeService.delete(routeId);
     }
 }

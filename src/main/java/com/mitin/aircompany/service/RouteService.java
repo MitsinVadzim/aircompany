@@ -37,4 +37,8 @@ public class RouteService {
         routeEntity.setId(routeId);
         return RouteConverter.convertToModel(routeRepository.save(routeEntity));
     }
+
+    public void delete(Long routeId){
+        routeRepository.deleteById(routeId);
+    }
 }
