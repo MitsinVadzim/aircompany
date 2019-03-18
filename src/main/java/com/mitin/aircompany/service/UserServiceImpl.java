@@ -2,6 +2,7 @@ package com.mitin.aircompany.service;
 
 import com.mitin.aircompany.entity.UserEntity;
 import com.mitin.aircompany.repository.UserRepository;
+import com.mitin.aircompany.service.interfaces.UserService;
 import com.mitin.aircompany.util.UserPrincipalConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,12 +11,12 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserService implements UserDetailsService {
+public class UserServiceImpl implements UserDetailsService, UserService {
 
     private final UserRepository userRepository;
 
     @Autowired
-    public UserService(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
