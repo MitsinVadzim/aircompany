@@ -21,6 +21,8 @@ public class DiscountConverter {
     }
 
     public static DiscountEntity convertToEntity(Discount discount){
-
+        return new DiscountEntity(
+                discount.getFromDate(), discount.getToDate(), discount.getValue()
+        );
     }
 }

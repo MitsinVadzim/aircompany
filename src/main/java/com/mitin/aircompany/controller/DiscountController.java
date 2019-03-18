@@ -5,11 +5,12 @@ import com.mitin.aircompany.service.DiscountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@RestController("/discounts")
 public class DiscountController {
 
     private final DiscountService discountService;
@@ -19,7 +20,7 @@ public class DiscountController {
         this.discountService = discountService;
     }
 
-    @GetMapping("/discounts")
+    @GetMapping
     public List<Discount> findAll(
             @RequestParam("page") int page,
             @RequestParam("size") int size
@@ -28,8 +29,18 @@ public class DiscountController {
         return discountService.findAll(pageable);
     }
 
-    @GetMapping("/discounts/{discountid}")
+    @GetMapping("{discountid}")
     public Discount findById(@PathVariable("discountid") Long discountId){
         return discountService.findById(discountId);
+    }
+
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @PostMapping
+    public Discount save(
+            @RequestBody Discount discount,
+            @RequestParam("fromPlace") String fromPlace,
+            @RequestParam("toPlace") String toPlace
+    ){
+        return discountService.save(discount, fromPlace, toPlace);
     }
 }
