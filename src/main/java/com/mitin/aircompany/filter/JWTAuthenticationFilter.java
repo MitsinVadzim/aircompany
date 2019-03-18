@@ -2,7 +2,6 @@ package com.mitin.aircompany.filter;
 
 import com.auth0.jwt.JWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mitin.aircompany.entity.UserEntity;
 import com.mitin.aircompany.principal.UserPrincipal;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -11,7 +10,6 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -32,8 +30,8 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     public Authentication attemptAuthentication(HttpServletRequest req,
                                                 HttpServletResponse res) throws AuthenticationException {
         try {
-            UserEntity creds = new ObjectMapper()
-                    .readValue(req.getInputStream(), UserEntity.class);
+            UserPrincipal creds = new ObjectMapper()
+                    .readValue(req.getInputStream(), UserPrincipal.class);
 
             return authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(

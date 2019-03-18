@@ -32,4 +32,14 @@ public class UserEntity{
 
     @ManyToMany(mappedBy = "subscribers")
     private Set<RouteEntity> subscriptions = new HashSet<>();
+
+    public UserEntity(String username, String password, String email, Set<RoleEntity> roles) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.roles = roles;
+    }
+
+    public UserEntity() {
+    }
 }

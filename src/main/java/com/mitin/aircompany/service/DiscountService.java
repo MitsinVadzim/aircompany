@@ -27,8 +27,4 @@ public class DiscountService {
     public Discount findById(Long discountId){
         return DiscountConverter.convertToModel(discountRepository.findById(discountId).orElseThrow(() -> new DiscountNotFoundException(discountId)));
     }
-
-    public Discount save(Discount discount){
-
-    }
 }

@@ -32,9 +32,4 @@ public class DiscountController {
     public Discount findById(@PathVariable("discountid") Long discountId){
         return discountService.findById(discountId);
     }
-
-    @PostMapping("/discounts")
-    public Discount save(@RequestBody Discount discount){
-
-    }
 }
