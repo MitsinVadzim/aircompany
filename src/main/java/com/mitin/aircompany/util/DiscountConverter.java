@@ -1,8 +1,10 @@
 package com.mitin.aircompany.util;
 
 import com.mitin.aircompany.entity.DiscountEntity;
+import com.mitin.aircompany.entity.RouteEntity;
 import com.mitin.aircompany.model.Discount;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,5 +26,17 @@ public class DiscountConverter {
         return new DiscountEntity(
                 discount.getFromDate(), discount.getToDate(), discount.getValue()
         );
+    }
+
+    public static DiscountEntity update(
+            DiscountEntity discountEntity,
+            Discount discount,
+            List<RouteEntity> routeEntities
+    ){
+        discountEntity.setFromDate(discount.getFromDate());
+        discountEntity.setToDate(discount.getToDate());
+        discountEntity.setValue(discount.getValue());
+        discountEntity.setRoutes(new HashSet<>(routeEntities));
+        return discountEntity;
     }
 }

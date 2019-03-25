@@ -5,6 +5,7 @@ import com.mitin.aircompany.service.RouteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,28 +29,33 @@ public class RouteController {
         return routeService.findAll(pageable);
     }
 
-    @GetMapping("/routes/{routeid}")
-    public Route findById(@PathVariable("routeid") Long routeId){
+    @GetMapping("/routes/{routeId}")
+    public Route findById(@PathVariable("routeId") Long routeId){
         return routeService.findById(routeId);
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping("/routes")
     public Route save(@RequestBody Route route){
         return routeService.save(route);
     }
 
-    @PutMapping("/routes/{routeid}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @PutMapping("/routes/{routeId}")
     public Route update(
             @RequestBody Route route,
-            @PathVariable("routeid") Long routeId
+            @PathVariable("routeId") Long routeId
     ){
         return routeService.update(route, routeId);
     }
 
-    @DeleteMapping("/routes/{routeid}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @DeleteMapping("/routes/{routeId}")
     public void delete(
-        @PathVariable("routeid") Long routeId
+        @PathVariable("routeId") Long routeId
     ){
         routeService.delete(routeId);
     }
+
+
 }

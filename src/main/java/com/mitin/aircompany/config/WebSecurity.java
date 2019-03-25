@@ -2,7 +2,7 @@ package com.mitin.aircompany.config;
 
 import com.mitin.aircompany.filter.JWTAuthenticationFilter;
 import com.mitin.aircompany.filter.JWTAuthorizationFilter;
-import com.mitin.aircompany.service.UserServiceImpl;
+import com.mitin.aircompany.service.impl.UserServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;

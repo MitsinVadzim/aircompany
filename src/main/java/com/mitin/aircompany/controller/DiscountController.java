@@ -29,8 +29,8 @@ public class DiscountController {
         return discountService.findAll(pageable);
     }
 
-    @GetMapping("{discountid}")
-    public Discount findById(@PathVariable("discountid") Long discountId){
+    @GetMapping("{discountId}")
+    public Discount findById(@PathVariable("discountId") Long discountId){
         return discountService.findById(discountId);
     }
 
@@ -38,9 +38,26 @@ public class DiscountController {
     @PostMapping
     public Discount save(
             @RequestBody Discount discount,
-            @RequestParam("fromPlace") String fromPlace,
-            @RequestParam("toPlace") String toPlace
+            @RequestParam("routeIds") List<Long> routeEntityIds
     ){
-        return discountService.save(discount, fromPlace, toPlace);
+        return discountService.save(discount, routeEntityIds);
+    }
+
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @PutMapping("{discountId}")
+    public Discount update(
+            @RequestBody Discount discount,
+            @PathVariable("discountId") Long discountId,
+            @RequestParam("routeIds") List<Long> routeEntityIds
+    ){
+        return discountService.update(discount, discountId, routeEntityIds);
+    }
+
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @DeleteMapping("{discountId}")
+    public void delete(
+        @PathVariable("discountId") Long discountId
+    ){
+        discountService.delete(discountId);
     }
 }

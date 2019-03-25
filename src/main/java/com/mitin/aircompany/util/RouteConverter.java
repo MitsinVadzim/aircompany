@@ -25,4 +25,10 @@ public class RouteConverter {
                 route.getNum(), route.getFromPlace(), route.getToPlace()
         );
     }
+
+    public static void update(RouteEntity routeEntity, Route route){
+        routeEntity.setNum(route.getNum());
+        routeEntity.setFromPlace(route.getFromPlace());
+        routeEntity.setToPlace(route.getToPlace());
+    }
 }

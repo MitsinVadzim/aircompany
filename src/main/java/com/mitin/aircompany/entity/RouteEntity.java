@@ -22,8 +22,6 @@ public class RouteEntity {
 
     private String toPlace;
 
-
-
     @OneToMany(mappedBy = "route", fetch = FetchType.LAZY)
     private List<FlightEntity> flightEntities;
 
