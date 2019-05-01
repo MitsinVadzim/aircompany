@@ -1,6 +1,8 @@
 package com.mitin.aircompany.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -10,19 +12,17 @@ import java.util.Set;
 @Entity
 @Data
 @Table(name = "route")
+@AllArgsConstructor
+@NoArgsConstructor
 public class RouteEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String num;
-
     private String fromPlace;
 
     private String toPlace;
-
-
 
     @OneToMany(mappedBy = "route", fetch = FetchType.LAZY)
     private List<FlightEntity> flightEntities;
@@ -38,8 +38,7 @@ public class RouteEntity {
     @ManyToMany(mappedBy = "routes")
     private Set<DiscountEntity> discounts = new HashSet<>();
 
-    public RouteEntity(String num, String fromPlace, String toPlace) {
-        this.num = num;
+    public RouteEntity(String fromPlace, String toPlace){
         this.fromPlace = fromPlace;
         this.toPlace = toPlace;
     }

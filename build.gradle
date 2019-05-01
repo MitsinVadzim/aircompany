@@ -20,7 +20,7 @@ dependencies {
 	implementation 'org.flywaydb:flyway-core'
 	implementation 'org.projectlombok:lombok'
 	implementation 'org.postgresql:postgresql'
-	compile("com.auth0:java-jwt")
+	compile 'com.auth0:auth0-spring-security-api:1.1.0'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'

@@ -11,6 +11,7 @@ import java.util.Set;
 @Data
 @Table(name = "discount")
 public class DiscountEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

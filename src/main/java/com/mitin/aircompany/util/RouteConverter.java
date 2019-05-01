@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 public class RouteConverter {
     public static Route convertToModel(RouteEntity routeEntity){
         return new Route(
-                routeEntity.getId(), routeEntity.getNum(),
+                routeEntity.getId(),
                 routeEntity.getFromPlace(), routeEntity.getToPlace()
         );
     }
@@ -22,7 +22,7 @@ public class RouteConverter {
 
     public static RouteEntity convertToEntity(Route route){
         return new RouteEntity(
-                route.getNum(), route.getFromPlace(), route.getToPlace()
+                route.getFromPlace(), route.getToPlace()
         );
     }
 }

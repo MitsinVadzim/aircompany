@@ -28,13 +28,8 @@ public class DiscountController {
         return discountService.findAll(pageable);
     }
 
-    @GetMapping("/discounts/{discountid}")
-    public Discount findById(@PathVariable("discountid") Long discountId){
+    @GetMapping("/discounts/{discountId}")
+    public Discount findById(@PathVariable("discountId") Long discountId){
         return discountService.findById(discountId);
-    }
-
-    @PostMapping("/discounts")
-    public Discount save(@RequestBody Discount discount){
-
     }
 }

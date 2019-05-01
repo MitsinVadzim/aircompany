@@ -20,7 +20,7 @@ public class DiscountConverter {
                 .collect(Collectors.toList());
     }
 
-    public static DiscountEntity convertToEntity(Discount discount){
-
-    }
+//    public static DiscountEntity convertToEntity(Discount discount){
+//
+//    }
 }

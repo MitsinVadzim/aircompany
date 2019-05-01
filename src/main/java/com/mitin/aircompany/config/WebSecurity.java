@@ -2,7 +2,7 @@ package com.mitin.aircompany.config;
 
 import com.mitin.aircompany.filter.JWTAuthenticationFilter;
 import com.mitin.aircompany.filter.JWTAuthorizationFilter;
-import com.mitin.aircompany.service.UserServiceImpl;
+import com.mitin.aircompany.service.impl.UserServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -30,12 +30,13 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable().authorizeRequests()
-                .antMatchers(HttpMethod.POST, SIGN_UP_URL).permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .addFilter(new JWTAuthenticationFilter(authenticationManager()))
-                .addFilter(new JWTAuthorizationFilter(authenticationManager()))
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .anyRequest().permitAll();
+                //.antMatchers(HttpMethod.GET, SIGN_UP_URL).permitAll()
+                //.anyRequest().authenticated()
+                //.and()
+                //.addFilter(new JWTAuthenticationFilter(authenticationManager()))
+                //.addFilter(new JWTAuthorizationFilter(authenticationManager()))
+                //.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 
     @Override

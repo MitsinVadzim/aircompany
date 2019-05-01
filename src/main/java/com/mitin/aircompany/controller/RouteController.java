@@ -23,33 +23,33 @@ public class RouteController {
     public List<Route> findAll(
             @RequestParam("page") int page,
             @RequestParam("size") int size
-    ){
+    ) {
         Pageable pageable = PageRequest.of(page, size);
         return routeService.findAll(pageable);
     }
 
-    @GetMapping("/routes/{routeid}")
-    public Route findById(@PathVariable("routeid") Long routeId){
+    @GetMapping("/routes/{routeId}")
+    public Route findById(@PathVariable("routeId") Long routeId) {
         return routeService.findById(routeId);
     }
 
     @PostMapping("/routes")
-    public Route save(@RequestBody Route route){
+    public Route save(@RequestBody Route route) {
         return routeService.save(route);
     }
 
-    @PutMapping("/routes/{routeid}")
+    @PutMapping("/routes/{routeId}")
     public Route update(
             @RequestBody Route route,
-            @PathVariable("routeid") Long routeId
-    ){
+            @PathVariable("routeId") Long routeId
+    ) {
         return routeService.update(route, routeId);
     }
 
-    @DeleteMapping("/routes/{routeid}")
+    @DeleteMapping("/routes/{routeId}")
     public void delete(
-        @PathVariable("routeid") Long routeId
-    ){
+            @PathVariable("routeId") Long routeId
+    ) {
         routeService.delete(routeId);
     }
 }

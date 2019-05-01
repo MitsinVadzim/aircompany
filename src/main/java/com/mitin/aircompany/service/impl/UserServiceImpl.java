@@ -1,8 +1,8 @@
-package com.mitin.aircompany.service;
+package com.mitin.aircompany.service.impl;
 
 import com.mitin.aircompany.entity.UserEntity;
 import com.mitin.aircompany.repository.UserRepository;
-import com.mitin.aircompany.service.interfaces.UserService;
+import com.mitin.aircompany.service.UserService;
 import com.mitin.aircompany.util.UserPrincipalConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
