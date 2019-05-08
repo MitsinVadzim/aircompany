@@ -44,8 +44,9 @@ public class RouteServiceImpl implements RouteService {
     @Override
     @Transactional
     public Route update(Route route, Long routeId){
-        RouteEntity routeEntity = RouteConverter.convertToEntity(route);
-        routeEntity.setId(routeId);
+        RouteEntity routeEntity = routeRepository.findById(routeId)
+                .orElseThrow(() -> new RouteNotFoundException(routeId));
+        RouteConverter.update(routeEntity, route);
         return RouteConverter.convertToModel(routeRepository.save(routeEntity));
     }
 

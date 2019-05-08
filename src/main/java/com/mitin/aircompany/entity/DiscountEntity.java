@@ -29,4 +29,13 @@ public class DiscountEntity {
             inverseJoinColumns = {@JoinColumn(name = "route_id")}
     )
     private Set<RouteEntity> routes = new HashSet<>();
+
+    public DiscountEntity(LocalDateTime fromDate, LocalDateTime toDate, Double value) {
+        this.fromDate = fromDate;
+        this.toDate = toDate;
+        this.value = value;
+    }
+
+    public DiscountEntity() {
+    }
 }

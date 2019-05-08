@@ -18,6 +18,8 @@ public class UserPrincipal implements UserDetails {
 
     private Set<RolePrincipal> roles;
 
+    private String email;
+
     public UserPrincipal() {
     }
 

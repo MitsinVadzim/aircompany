@@ -20,6 +20,8 @@ dependencies {
 	implementation 'org.flywaydb:flyway-core'
 	implementation 'org.projectlombok:lombok'
 	implementation 'org.postgresql:postgresql'
+	compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
+	compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
 	compile 'com.auth0:auth0-spring-security-api:1.1.0'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
