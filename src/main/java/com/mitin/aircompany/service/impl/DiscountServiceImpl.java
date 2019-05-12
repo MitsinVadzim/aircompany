@@ -7,7 +7,7 @@ import com.mitin.aircompany.entity.DiscountEntity;
 import com.mitin.aircompany.entity.RouteEntity;
 import com.mitin.aircompany.repository.RouteRepository;
 import com.mitin.aircompany.service.DiscountService;
-import com.mitin.aircompany.util.DiscountConverter;
+import com.mitin.aircompany.converter.DiscountConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;

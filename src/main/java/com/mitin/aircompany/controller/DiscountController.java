@@ -21,15 +21,6 @@ public class DiscountController {
         this.discountService = discountService;
     }
 
-//    @GetMapping
-//    public List<Discount> findAll(
-//            @RequestParam("page") int page,
-//            @RequestParam("size") int size
-//    ){
-//        Pageable pageable = PageRequest.of(page, size);
-//        return discountService.findAll(pageable);
-//    }
-
     @GetMapping
     public List<Discount> findAll(
             @RequestParam("page") int page,

@@ -1,0 +1,25 @@
+<<mat-card>
+  <form #routeForm="ngForm" (ngSubmit)="save(routeForm.value)">
+    <mat-card-header>
+      <mat-card-title><h2>{{customRoute.fromPlace ? 'Edit' : 'Add'}} Route</h2></mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <input type="hidden" name="id" [(ngModel)]="customRoute.id">
+      <mat-form-field>
+        <input matInput placeholder="Route from place" [(ngModel)]="customRoute.fromPlace"
+               required name="fromPlace" #fromPlace>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Route to place" [(ngModel)]="customRoute.toPlace"
+               required name="toPlace" #toPlace>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit"
+              [disabled]="!routeForm.form.valid">Save</button>
+      <button mat-raised-button color="secondary" (click)="delete(customRoute.id)"
+              *ngIf="customRoute.id" type="button">Delete</button>
+      <a mat-button routerLink="/routes">Cancel</a>
+    </mat-card-actions>
+  </form>
+</mat-card>

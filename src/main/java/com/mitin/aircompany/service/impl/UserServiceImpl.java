@@ -4,7 +4,7 @@ import com.mitin.aircompany.entity.UserEntity;
 import com.mitin.aircompany.model.User;
 import com.mitin.aircompany.repository.UserRepository;
 import com.mitin.aircompany.service.UserService;
-import com.mitin.aircompany.util.UserConverter;
+import com.mitin.aircompany.converter.UserConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;

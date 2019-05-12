@@ -1,6 +1,8 @@
 package com.mitin.aircompany.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -10,10 +12,13 @@ import java.util.Set;
 @Entity
 @Data
 @Table(name = "discount")
+@NoArgsConstructor
+@AllArgsConstructor
 public class DiscountEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", updatable = false, nullable = false)
     private Long id;
 
     private LocalDateTime fromDate;
@@ -34,8 +39,5 @@ public class DiscountEntity {
         this.fromDate = fromDate;
         this.toDate = toDate;
         this.value = value;
-    }
-
-    public DiscountEntity() {
     }
 }
