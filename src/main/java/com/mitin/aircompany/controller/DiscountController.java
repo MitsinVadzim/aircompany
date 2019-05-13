@@ -1,10 +1,10 @@
 package com.mitin.aircompany.controller;
 
+import com.mitin.aircompany.converter.DiscountConverter;
 import com.mitin.aircompany.model.Discount;
+import com.mitin.aircompany.repository.DiscountRepository;
 import com.mitin.aircompany.service.DiscountService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,19 +15,29 @@ import java.util.List;
 public class DiscountController {
 
     private final DiscountService discountService;
+    private final DiscountConverter discountConverter;
+    private final DiscountRepository discountRepository;
 
     @Autowired
-    public DiscountController(DiscountService discountService) {
+    public DiscountController(DiscountService discountService, DiscountConverter discountConverter, DiscountRepository discountRepository) {
         this.discountService = discountService;
+        this.discountConverter = discountConverter;
+        this.discountRepository = discountRepository;
     }
+
+//    @GetMapping
+//    public List<Discount> findAll(
+//            @RequestParam("page") int page,
+//            @RequestParam("size") int size
+//    ){
+//        Pageable pageable = PageRequest.of(page, size);
+//        return discountService.findAll(pageable);
+//    }
 
     @GetMapping
     public List<Discount> findAll(
-            @RequestParam("page") int page,
-            @RequestParam("size") int size
     ){
-        Pageable pageable = PageRequest.of(page, size);
-        return discountService.findAll(pageable);
+        return discountConverter.convertToModel(discountRepository.findAll());
     }
 
     @GetMapping("{discountId}")

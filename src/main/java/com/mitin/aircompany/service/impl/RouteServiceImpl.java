@@ -57,4 +57,10 @@ public class RouteServiceImpl implements RouteService {
     public void delete(Long routeId){
         routeRepository.deleteById(routeId);
     }
+
+    @Override
+    @Transactional
+    public List<Route> findByPlace(String place) {
+        return routeConverter.convertToModel(routeRepository.findAllByFromPlaceStartingWithOrToPlaceStartingWith(place, place));
+    }
 }

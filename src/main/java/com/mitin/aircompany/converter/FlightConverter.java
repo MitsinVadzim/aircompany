@@ -1,6 +1,7 @@
 package com.mitin.aircompany.converter;
 
 import com.mitin.aircompany.entity.FlightEntity;
+import com.mitin.aircompany.entity.RouteEntity;
 import com.mitin.aircompany.model.Flight;
 import org.springframework.stereotype.Component;
 
@@ -10,13 +11,14 @@ import java.util.stream.Collectors;
 @Component
 public class FlightConverter {
 
-    public FlightEntity toEntity(Flight flight){
+    public FlightEntity toEntity(Flight flight, RouteEntity routeEntity){
         return FlightEntity.builder()
                 .capacity(flight.getCapacity())
                 .dateTime(flight.getDateTime())
                 .numberOfSeats(flight.getNumberOfSeats())
                 .price(flight.getPrice())
                 .routeId(flight.getRouteId())
+                .route(routeEntity)
                 .build();
     }
 

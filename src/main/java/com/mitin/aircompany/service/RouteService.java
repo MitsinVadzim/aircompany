@@ -18,4 +18,6 @@ public interface RouteService {
     Route update(Route route, Long routeId);
 
     void delete(Long routeId);
+
+    List<Route> findByPlace(String place);
 }

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {el} from "@angular/platform-browser/testing/src/browser_util";
+import {Route} from "../../modules/models/route.model";
+import {debounceTime} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +33,11 @@ export class RouteService {
   }
 
   delete(id: string){
-    return  this.http.delete(this.ROUTE_API + '/' + id);
+     return this.http.delete(this.ROUTE_API + '/' + id);
+  }
+
+  getAutocompleteRoutes(input: string): Observable<Route[]>{
+    return this.http.get<Route[]>(this.ROUTE_API + '/place/' + input).pipe(debounceTime(500));
   }
 
 

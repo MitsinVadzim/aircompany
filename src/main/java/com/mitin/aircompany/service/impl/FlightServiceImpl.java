@@ -1,10 +1,12 @@
 package com.mitin.aircompany.service.impl;
 
 import com.mitin.aircompany.converter.FlightConverter;
-import com.mitin.aircompany.entity.FlightEntity;
+import com.mitin.aircompany.entity.RouteEntity;
 import com.mitin.aircompany.exception.FlightNotFoundException;
+import com.mitin.aircompany.exception.RouteNotFoundException;
 import com.mitin.aircompany.model.Flight;
 import com.mitin.aircompany.repository.FlightRepository;
+import com.mitin.aircompany.repository.RouteRepository;
 import com.mitin.aircompany.service.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -16,11 +18,13 @@ import java.util.List;
 public class FlightServiceImpl implements FlightService {
     private final FlightRepository flightRepository;
     private final FlightConverter flightConverter;
+    private final RouteRepository routeRepository;
 
     @Autowired
-    public FlightServiceImpl(FlightRepository flightRepository, FlightConverter flightConverter) {
+    public FlightServiceImpl(FlightRepository flightRepository, FlightConverter flightConverter, RouteRepository routeRepository) {
         this.flightRepository = flightRepository;
         this.flightConverter = flightConverter;
+        this.routeRepository = routeRepository;
     }
 
     @Override
@@ -36,12 +40,16 @@ public class FlightServiceImpl implements FlightService {
 
     @Override
     public Flight save(Flight flight) {
-        return flightConverter.toModel(flightRepository.save(flightConverter.toEntity(flight)));
+        RouteEntity routeEntity = routeRepository.findById(flight.getRouteId())
+                .orElseThrow(() -> new RouteNotFoundException(flight.getRouteId()));
+        return flightConverter.toModel(flightRepository.save(flightConverter.toEntity(flight, routeEntity)));
     }
 
     @Override
     public Flight update(Flight flight) {
-        return flightConverter.toModel(flightRepository.save(flightConverter.toEntity(flight)));
+        RouteEntity routeEntity = routeRepository.findById(flight.getRouteId())
+                .orElseThrow(() -> new RouteNotFoundException(flight.getRouteId()));
+        return flightConverter.toModel(flightRepository.save(flightConverter.toEntity(flight, routeEntity)));
     }
 
     @Override

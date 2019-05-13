@@ -1,10 +1,10 @@
 package com.mitin.aircompany.controller;
 
+import com.mitin.aircompany.converter.FlightConverter;
 import com.mitin.aircompany.model.Flight;
+import com.mitin.aircompany.repository.FlightRepository;
 import com.mitin.aircompany.service.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,19 +14,28 @@ import java.util.List;
 public class FlightController {
 
     private final FlightService flightService;
+    private final FlightRepository flightRepository;
+    private final FlightConverter flightConverter;
 
     @Autowired
-    public FlightController(FlightService flightService) {
+    public FlightController(FlightService flightService, FlightRepository flightRepository, FlightConverter flightConverter) {
         this.flightService = flightService;
+        this.flightRepository = flightRepository;
+        this.flightConverter = flightConverter;
     }
 
+//    @GetMapping
+//    public List<Flight> findAll(
+//            @RequestParam("page") int page,
+//            @RequestParam("size") int size
+//    ){
+//        Pageable pageable = PageRequest.of(page, size);
+//        return flightService.findAll(pageable);
+//    }
+
     @GetMapping
-    public List<Flight> findAll(
-            @RequestParam("page") int page,
-            @RequestParam("size") int size
-    ){
-        Pageable pageable = PageRequest.of(page, size);
-        return flightService.findAll(pageable);
+    public List<Flight> findAll(){
+        return flightConverter.toModel(flightRepository.findAll());
     }
 
     @GetMapping("{flightId}")
@@ -43,9 +52,10 @@ public class FlightController {
         return flightService.save(flight);
     }
 
-    @PutMapping
+    @PutMapping("{flightId}")
     public Flight update(
-            @RequestBody Flight flight
+            @RequestBody Flight flight,
+            @PathVariable Long flightId
     ){
         return flightService.update(flight);
     }

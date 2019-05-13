@@ -1,5 +1,8 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <mat-toolbar color="primary">
   <span>Welcome to {{title}}!</span>
+  <a mat-button [routerLink]="['/routes']">Route List</a>
+  <a mat-button [routerLink]="['/flights']">Flight List</a>
+  <a mat-button [routerLink]="['/discounts']">Discount List</a>
 </mat-toolbar>
 <router-outlet></router-outlet>

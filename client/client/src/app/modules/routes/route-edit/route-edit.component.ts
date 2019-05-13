@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from "rxjs";
 import {ActivatedRoute, Router} from "@angular/router";
-import {RouteService} from "../../shared/route/route.service";
+import {RouteService} from "../../../service/route/route.service";
 import {NgForm} from "@angular/forms";
 
 @Component({
@@ -27,7 +27,7 @@ export class RouteEditComponent implements OnInit, OnDestroy {
           if (customRoute) {
             this.customRoute = customRoute;
           }else {
-            console.log(`Car with id '${id}' not found, returning to list`);
+            console.log(`Route with id '${id}' not found, returning to list`);
             this.goToList();
           }
         })

@@ -1,10 +1,14 @@
 package com.mitin.aircompany.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Discount {
     private Long id;
 
@@ -13,11 +17,4 @@ public class Discount {
     private LocalDateTime toDate;
 
     private Double value;
-
-    public Discount(Long id, LocalDateTime fromDate, LocalDateTime toDate, Double value) {
-        this.id = id;
-        this.fromDate = fromDate;
-        this.toDate = toDate;
-        this.value = value;
-    }
 }

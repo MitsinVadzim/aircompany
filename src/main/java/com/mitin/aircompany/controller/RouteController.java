@@ -43,6 +43,11 @@ public class RouteController {
         return routeService.findById(routeId);
     }
 
+    @GetMapping("place/{place}")
+    public List<Route> findByPlace(@PathVariable("place") String place){
+        return routeService.findByPlace(place);
+    }
+
     //@PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping()
     public Route save(@RequestBody Route route) {

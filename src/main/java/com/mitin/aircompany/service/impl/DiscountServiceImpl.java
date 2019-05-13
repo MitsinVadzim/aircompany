@@ -21,23 +21,25 @@ public class DiscountServiceImpl implements DiscountService {
 
     private final DiscountRepository discountRepository;
     private final RouteRepository routeRepository;
+    private final DiscountConverter discountConverter;
 
     @Autowired
-    public DiscountServiceImpl(DiscountRepository discountRepository, RouteRepository routeRepository) {
+    public DiscountServiceImpl(DiscountRepository discountRepository, RouteRepository routeRepository, DiscountConverter discountConverter) {
         this.discountRepository = discountRepository;
         this.routeRepository = routeRepository;
+        this.discountConverter = discountConverter;
     }
 
 
     @Override
     public List<Discount> findAll(Pageable pageable){
-        return DiscountConverter.convertToModel(discountRepository.findAll(pageable).getContent());
+        return discountConverter.convertToModel(discountRepository.findAll(pageable).getContent());
     }
 
     @Override
     @Transactional
     public Discount findById(Long discountId) {
-        return DiscountConverter.convertToModel(discountRepository.findById(discountId)
+        return discountConverter.convertToModel(discountRepository.findById(discountId)
                 .orElseThrow(() -> new DiscountNotFoundException(discountId)));
     }
 
@@ -45,9 +47,9 @@ public class DiscountServiceImpl implements DiscountService {
     @Transactional
     public Discount save(Discount discount, List<Long> routeEntityIds){
         List<RouteEntity> routeEntities = routeRepository.findAllById(routeEntityIds);
-        DiscountEntity discountEntity = DiscountConverter.convertToEntity(discount);
+        DiscountEntity discountEntity = discountConverter.convertToEntity(discount);
         discountEntity.setRoutes(new HashSet<>(routeEntities));
-        return DiscountConverter.convertToModel(discountRepository.save(discountEntity));
+        return discountConverter.convertToModel(discountRepository.save(discountEntity));
     }
 
     @Override
@@ -56,8 +58,8 @@ public class DiscountServiceImpl implements DiscountService {
         DiscountEntity existingDiscount = discountRepository.findById(discountId)
                 .orElseThrow(() -> new DiscountNotFoundException(discountId));
         List<RouteEntity> routeEntities = routeRepository.findAllById(routeEntityIds);
-        DiscountEntity toUpdate = DiscountConverter.update(existingDiscount, discount, routeEntities);
-        return DiscountConverter.convertToModel(discountRepository.save(toUpdate));
+        DiscountEntity toUpdate = discountConverter.update(existingDiscount, discount, routeEntities);
+        return discountConverter.convertToModel(discountRepository.save(toUpdate));
     }
 
     @Override

@@ -9,4 +9,6 @@ import java.util.List;
 
 @Repository
 public interface RouteRepository extends JpaRepository<RouteEntity, Long> {
+    List<RouteEntity> findAllByFromPlaceOrToPlace(String fromSearch, String toSearch);
+    List<RouteEntity> findAllByFromPlaceStartingWithOrToPlaceStartingWith(String fromSearch, String toSearch);
 }

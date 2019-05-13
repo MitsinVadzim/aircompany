@@ -1,0 +1,53 @@
+<mat-card>
+  <form #flightForm="ngForm" (ngSubmit)="save(flightForm.value)">
+    <mat-card-header>
+      <mat-card-title><h2>{{flight.id ? 'Edit' : 'Add'}} Route</h2></mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <input type="hidden" name="id" [(ngModel)]="flightToSend.id">
+      <mat-form-field>
+        <input matInput placeholder="Flight capacity" [(ngModel)]="flightToSend.capacity"
+               required name="capacity" #capacity>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [matDatepicker]="dateTime" [(ngModel)]="flightToSend.dateTime" name="dateTime">
+        <mat-datepicker-toggle matSuffix [for]="dateTime"></mat-datepicker-toggle>
+        <mat-datepicker #dateTime></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Flight number of seats" [(ngModel)]="flightToSend.numberOfSeats"
+               required name="numberOfSeats" #numberOfSeats>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Flight price" [(ngModel)]="flightToSend.price"
+               required name="price" #price>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Flight route id" [formControl]="routePlaceControl"
+               [matAutocomplete]="auto1" [(ngModel)]="this.currentRouteId"
+               required name="routeId" #routeId>
+        <mat-autocomplete #auto1="matAutocomplete">
+          <mat-option *ngFor="let routePlace of routes" [value]="routePlace.id">
+            {{routePlace.fromPlace}} - {{routePlace.toPlace}}
+          </mat-option>
+        </mat-autocomplete>
+        <mat-error *ngIf="(routePlaceControl.untouched || routePlaceControl.dirty)">
+          Choose from the list <strong>below</strong>
+        </mat-error>
+      </mat-form-field>
+      <!--      <mat-form-field>-->
+      <!--        <input matInput placeholder="Flight route id" [(ngModel)]="flight.routeId"-->
+      <!--               required name="routeId" #routeId>-->
+      <!--      </mat-form-field>-->
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit"
+              [disabled]="!flightForm.form.valid">Save
+      </button>
+      <button mat-raised-button color="secondary" (click)="delete(flight.id)"
+              *ngIf="flight.id" type="button">Delete
+      </button>
+      <a mat-button routerLink="/flights">Cancel</a>
+    </mat-card-actions>
+  </form>
+</mat-card>
